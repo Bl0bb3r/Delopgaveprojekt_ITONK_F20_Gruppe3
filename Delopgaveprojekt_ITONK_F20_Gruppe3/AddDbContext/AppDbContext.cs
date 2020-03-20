@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AddDbContext
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContext<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             LoadDB();
         }
@@ -18,7 +18,22 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AddDbContext
         public DbSet<Vaerktoej> Vaerktoejer { get; set; }
         public DbSet<Vaerktoejskasse> Vaerktoejskasser { get; set; }
 
-
-
+        public void LoadDB()
+        {
+            List<Vaerktoejskasse> vaerktoej = new List<Vaerktoejskasse>
+            {
+                new Vaerktoejskasse {VTKFarve = "Roed"}
+            };
+            Haandvaerkere.Add(new Haandvaerker
+            {
+                HaandvaerkerID = 0, HVFornavn = "Brian", HVEfternavn = "Jacobsen", HVAnsaettelsedato = DateTime.Today,
+                HVFagomraade = "Tømrer", Vaerktoejskasse = vaerktoej.ToHashSet()
+            });
+            Vaerktoejer.Add(new Vaerktoej
+            {
+                VTID = 0, VTFabrikat = "Dewalt", VTSerienr = "ABC1337XYZ", VTModel = "q49", VTType = "Boremaskine",
+                VTAnskaffet = DateTime.Now, LiggerIvtk = 1
+            });
+        }
     }
 }
