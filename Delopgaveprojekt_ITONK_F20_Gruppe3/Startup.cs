@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Delopgaveprojekt_ITONK_F20_Gruppe3.AddDbContext;
+using Delopgaveprojekt_ITONK_F20_Gruppe3.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +27,7 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
         {
             services.AddControllersWithViews();
 
-            // inspiration from video; "  "
+            // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
             var host = "host";
             var port = "5000";
             var password = "secret";
@@ -36,12 +36,15 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                 {
                     options.UseMySql($"Server={host}; Uid=root; Pwd={password}; Port={port};Database=haandvaerkere");
                 }
-        };
-        
+            );
+            services.AddScoped<IHaandvaerkerRepository, HaandvaerkerRepository>();
+            services.AddScoped<IVaerktoejRepository, VaerktoejRepository>();
+            services.AddScoped<IVaerktoejskasseRepository, VaerktoejskasseRepository>();
+        }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Delopgaveprojekt.AppDbContext.AppDbContext context)
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Delopgaveprojekt_ITONK_F20_Gruppe3.AppDbContext.AppDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -58,8 +61,6 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseCors(MyAllowSpecificaticOrigins);
 
             context.Database.Migrate();
 

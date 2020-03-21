@@ -1,5 +1,4 @@
-﻿using Delopgaveprojekt_ITONK_F20_Gruppe3.AddDbContext;
-using Delopgaveprojekt_ITONK_F20_Gruppe3.Models;
+﻿using Delopgaveprojekt_ITONK_F20_Gruppe3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +8,9 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3.Repositories
 {
     public class HaandvaerkerRepository : IHaandvaerkerRepository
     {
-        private readonly AppDbContext _dbContext;
+        private readonly AppDbContext.AppDbContext _dbContext;
 
-        public HaandvaerkerRepository(AppDbContext context)
+        public HaandvaerkerRepository(AppDbContext.AppDbContext context)
         {
             _dbContext = context;
         }

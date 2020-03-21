@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Delopgaveprojekt_ITONK_F20_Gruppe3.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AddDbContext
+namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AppDbContext
 {
     public class AppDbContext : DbContext
     {
