@@ -28,13 +28,13 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             services.AddControllersWithViews();
 
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
-            var host = "host";
-            var port = "5000";
-            var password = "secret";
+            var host = "localhost";
+            var port = "3306";
+            var password = "Julemand1996";
 
             services.AddDbContext<AppDbContext.AppDbContext>(options =>
                 {
-                    options.UseMySql($"Server={host}; Uid=root; Pwd={password}; Port={port};Database=haandvaerkere");
+                    options.UseMySql($"Server={host}; Uid=root; Pwd={password}; Port={port};Database=haandvaerkerdb");
                 }
             );
             services.AddScoped<IHaandvaerkerRepository, HaandvaerkerRepository>();

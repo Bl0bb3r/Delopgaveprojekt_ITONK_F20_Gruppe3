@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NPoco;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.VisualBasic;
 
 namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AppDB
 {
     public class DatabaseFactory : IDatabaseFactory
     {
-        private SqlConnection con = new SqlConnection(Constants.sqlConnectionString); //Missing connection string in constants folder & missing constants folder
+        private const string sqlConnectionString = "server=localhost; database=haandvaerkerdb;";
+        private SqlConnection con = new SqlConnection(sqlConnectionString);
 
         public IDatabase GetDatabase()
         {
