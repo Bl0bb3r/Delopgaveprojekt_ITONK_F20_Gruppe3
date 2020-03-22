@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delopgaveprojekt_ITONK_F20_Gruppe3", "Delopgaveprojekt_ITONK_F20_Gruppe3\Delopgaveprojekt_ITONK_F20_Gruppe3.csproj", "{0570DBED-5F7B-4227-BAC0-3E9A60FA2336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delopgaveprojekt_ITONK_F20_Gruppe3", "Delopgaveprojekt_ITONK_F20_Gruppe3\Delopgaveprojekt_ITONK_F20_Gruppe3.csproj", "{0570DBED-5F7B-4227-BAC0-3E9A60FA2336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Delopgaveprojekt_ITONK_F20_Gruppe3.Models
+namespace Delopgaveprojekt_ITONK_F20_Gruppe3_Frontend.Models
 {
     public partial class Vaerktoejskasse
     {
