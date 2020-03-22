@@ -32,8 +32,8 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             //services.AddControllersWithViews();
 
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
-            var host = Configuration["localhost"]; //Need to determine host
-            var password = Configuration["my-secret-pw"];
+            var host = Configuration["SQLSERVER_GRP3"]; //Need to determine host
+            var password = Configuration["F20ITONK"];
 
             var connectionString =
                 $"Data Source ={host}; User ID = SA; Password = {password}; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";

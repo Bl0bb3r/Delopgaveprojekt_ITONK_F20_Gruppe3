@@ -1,0 +1,14 @@
+﻿version: "3.4"
+services:
+  db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "F20ITONK"
+            HOSTNAME: "SQLSERVER_GRP3"
+            ACCEPT_EULA: "Y"
+
+  delopgaveprojekt_itonk_f20_gruppe3:
+    image: ${DOCKER_REGISTRY-}delopgaveprojektitonkf20gruppe3
+    build:
+      context: .
+      dockerfile: Dockerfile
