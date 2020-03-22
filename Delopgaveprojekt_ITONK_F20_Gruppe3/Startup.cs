@@ -29,10 +29,8 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddControllersWithViews();
-
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
-            var host = Configuration["SQLSERVER_GRP3"]; //Need to determine host
+            var host = Configuration["SQLSERVER_GRP3"];
             var password = Configuration["F20ITONK"];
 
             var connectionString =
@@ -40,16 +38,6 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             services.AddDbContext<AppDbContext.AppDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-
-            /*
-            services.AddDbContext<AppDbContext.AppDbContext>(options =>
-                {
-                    options.UseMySql($"Server={host}; Uid=root; Pwd={password}; Port={port};Database=haandvaerkerdb");
-                }
-            );
-            services.AddScoped<IHaandvaerkerRepository, HaandvaerkerRepository>();
-            services.AddScoped<IVaerktoejRepository, VaerktoejRepository>();
-            services.AddScoped<IVaerktoejskasseRepository, VaerktoejskasseRepository>();*/
         }
 
 
@@ -77,20 +65,6 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
-            /*
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            context.Database.Migrate();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                    
-            });*/
             }
     }
 }
