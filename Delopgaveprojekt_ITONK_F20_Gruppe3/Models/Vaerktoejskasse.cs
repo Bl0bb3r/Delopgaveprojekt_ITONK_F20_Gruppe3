@@ -22,5 +22,8 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3.Models
         public DateTime VTKAnskaffet { get; set; }
         public HashSet<Vaerktoej> Vaerktoej { get; set; }
 
+
+
+
     }
 }
