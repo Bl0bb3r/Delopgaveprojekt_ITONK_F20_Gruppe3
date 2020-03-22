@@ -29,7 +29,7 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
             var host = Configuration["localhost"]; //Need to determine host
@@ -55,28 +55,28 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext.AppDbContext context)
-        {
-            if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+                else
+                {
+                    app.UseExceptionHandler("/Home/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    //app.UseHsts();
+                }
 
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-            context.Database.Migrate();
+                app.UseStaticFiles();
+                app.UseCookiePolicy();
+                context.Database.Migrate();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+                });
             /*
             app.UseHttpsRedirection();
 
@@ -91,6 +91,6 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                 endpoints.MapControllers();
                     
             });*/
-        }
+            }
     }
 }
