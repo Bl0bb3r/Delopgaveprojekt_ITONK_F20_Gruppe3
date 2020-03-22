@@ -1,5 +1,5 @@
-﻿using NPoco;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Delopgaveprojekt_ITONK_F20_Gruppe3.AppDB
 {
