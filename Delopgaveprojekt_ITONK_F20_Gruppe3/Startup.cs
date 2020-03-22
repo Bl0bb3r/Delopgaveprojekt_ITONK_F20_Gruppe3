@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Delopgaveprojekt_ITONK_F20_Gruppe3.AppDbContext;
 using Delopgaveprojekt_ITONK_F20_Gruppe3.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Delopgaveprojekt_ITONK_F20_Gruppe3
 {
@@ -25,13 +22,26 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddControllersWithViews();
 
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
-            var host = "localhost";
-            var port = "3306";
-            var password = "Julemand1996";
+            var host = Configuration["localhost"]; //Need to determine host
+            var password = Configuration["my-secret-pw"];
 
+            var connectionString =
+                $"Data Source ={host}; User ID = SA; Password = {password}; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            services.AddDbContext<AppDbContext.AppDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+            /*
             services.AddDbContext<AppDbContext.AppDbContext>(options =>
                 {
                     options.UseMySql($"Server={host}; Uid=root; Pwd={password}; Port={port};Database=haandvaerkerdb");
@@ -39,12 +49,12 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             );
             services.AddScoped<IHaandvaerkerRepository, HaandvaerkerRepository>();
             services.AddScoped<IVaerktoejRepository, VaerktoejRepository>();
-            services.AddScoped<IVaerktoejskasseRepository, VaerktoejskasseRepository>();
+            services.AddScoped<IVaerktoejskasseRepository, VaerktoejskasseRepository>();*/
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Delopgaveprojekt_ITONK_F20_Gruppe3.AppDbContext.AppDbContext context)
+            public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext.AppDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -56,6 +66,18 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+            context.Database.Migrate();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            /*
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -68,7 +90,7 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
             {
                 endpoints.MapControllers();
                     
-            });
+            });*/
         }
     }
 }
