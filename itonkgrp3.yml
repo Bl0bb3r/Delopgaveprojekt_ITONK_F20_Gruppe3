@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itonkgrp3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: itonkgrp3
+  template:
+    metadata:
+      labels:
+        app: itonkgrp3
+    spec:
+      containers:
+        - name: itonkgrp3-container
+          image: mikkelbc/itonkgrp3:v6
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: f20ITONK
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: itonkgrp3-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443
+  selector:
+    app: itonkgrp3

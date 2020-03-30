@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  delopgaveprojekt_itonk_f20_gruppe3:
-    image: ${DOCKER_REGISTRY-}delopgaveprojektitonkf20gruppe3
-    build:
-      context: .
-      dockerfile: Delopgaveprojekt_ITONK_F20_Gruppe3\Dockerfile

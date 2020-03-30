@@ -23,14 +23,14 @@ namespace Delopgaveprojekt_ITONK_F20_Gruppe3
         public void ConfigureServices(IServiceCollection services)
         {
             // inspiration from video; "https://www.youtube.com/watch?time_continue=482&v=o1qxhe6Fnu0&feature=emb_logo"
-            var host = Configuration["SQLSERVER_GRP3"];
-            var password = Configuration["F20ITONK"];
+            var host = Configuration["ITONKGRP3_SQLSERVER_SERVICE_HOST"];
+            var password = Configuration["MSSQL_SA_PASSWORD"];
 
             var connectionString =
                 $"Data Source ={host}; User ID = SA; Password = {password}; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             services.AddDbContext<AppDbContext.AppDbContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc( x => x.EnableEndpointRouting=false).SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
 
